@@ -16,13 +16,7 @@ public class Bank{
 		
 		return null;
 	}
-	
-	//TODO
-	public void addClient(String name, String iD) {
-		
-		
-	}
-	 
+ 
 	
 	//TODO 
 	public boolean modifyBalance(String iD) {
