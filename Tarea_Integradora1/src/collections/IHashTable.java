@@ -8,10 +8,11 @@ public interface IHashTable<K,V> {
 
     public int getArrayIndex(K key);
 
-    public V getElement(K key);
+    public V get(K key);
 
-    public V removeElement(K key);
+    public V removeElement(K key, Element<K,V> erased);
 
     public void addElement(K key, V value);
+
 
 }

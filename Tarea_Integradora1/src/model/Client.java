@@ -17,7 +17,7 @@ public class Client {
 		
 		for(int i = 0; i<12; i++) {
 			accountNumber += String.valueOf((int)Math.floor(Math.random()*9));
-		}
+	}
 		
 		registerDate = LocalDate.now();	
 	}
