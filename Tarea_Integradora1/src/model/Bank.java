@@ -4,37 +4,41 @@ import collections.*;
 public class Bank{
 	
 	private HashTable<String, Client> clients;
-	private IQueue<Client> colaClientes;
-	private IQueue<Client> colaBasica;
+	private PriorityQueue<Client> colaClientes;
+	private Queue<Client> colaBasica;
 	
 	public Bank() {
 		this.colaBasica= new Queue<Client>();
-		this.colaClientes = new Queue<Client>();
+		this.colaClientes = new PriorityQueue<Client>();
 		clients = new HashTable<String,Client>();
 	}
 	
-	//TODO
-	public boolean addClient(String name, String iD) {
+	//TODO Check method
+	public boolean addClient(String name, String iD, int priority) {
 		boolean a = false;
-		
+		if(priority != 0) {
+			Instance<Client> alpha = new Instance<Client>(new Client(name, iD, priority));
+			colaClientes.insert(alpha);
+			a = true;
+		}else {
+			colaBasica.enqueue(new Client(name, iD, priority));
+			a = true;
+		}
 	
-		
 		return a;
 	}
 	
 	
-	//TODO
+	//TODO Check method
 	public Client searchClient(String code) {
-		
-		return null;
+		return clients.get(code);
 	}
  
 	
-	//TODO 
-	public boolean modifyBalance(String iD) {
-		boolean a = false;
-		
-		return a;
+	//TODO Check method
+	public double modifyBalance(String iD, double value) {
+		double result = searchClient(iD).getCard().balance(value);	
+		return result;
 	}
 	
 	//TODO

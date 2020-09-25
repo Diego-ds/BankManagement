@@ -2,19 +2,20 @@ package model;
 
 import java.time.LocalDate;
 
-public class Client {
+public class Client implements Comparable<Client> {
 	
 	private DebitCard card;
 	private String name;
 	private String iD;
 	private String accountNumber;
 	private LocalDate registerDate;
+	private int priority;
 	
 	
-	public Client(String name, String iD) {
+	public Client(String name, String iD, int priority) {
 		this.name = name;
 		this.iD = iD;
-		
+		this.priority = priority;
 		for(int i = 0; i<12; i++) {
 			accountNumber += String.valueOf((int)Math.floor(Math.random()*9));
 	}
@@ -40,6 +41,16 @@ public class Client {
 
 	public LocalDate getRegisterDate() {
 		return registerDate;
+	}
+
+	public int getPriority() {
+		return priority;
+	}
+
+	@Override
+	public int compareTo(Client o) {
+		
+		return priority-o.getPriority();
 	}
 	
 	

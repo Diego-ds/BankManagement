@@ -35,8 +35,9 @@ public class DebitCard {
 		return moneyAmount;
 	}
 
-	public void setMoneyAmount(double moneyAmount) {
-		this.moneyAmount = moneyAmount;
+	public Double balance(double moneyAmount) {
+		this.moneyAmount = this.moneyAmount + moneyAmount;
+		return moneyAmount;
 	}
 	
 }
