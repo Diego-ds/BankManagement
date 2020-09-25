@@ -69,7 +69,8 @@ public class HashTable<K,V> implements IHashTable<K,V> {
 			if(e!=null) {
 				if(e.getKey().equals(key)) {				
 					Element<K,V> deleted = array[probing];
-					array[probing]=erased;		
+					array[probing]=erased;	
+					size--;
 					return deleted.getValue();
 				}
 			}else {
