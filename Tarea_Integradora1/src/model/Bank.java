@@ -6,11 +6,13 @@ public class Bank{
 	private HashTable<String, Client> clients;
 	private PriorityQueue<Client> colaClientes;
 	private Queue<Client> colaBasica;
+	private Stack<Client> actions;
 	
 	public Bank() {
 		this.colaBasica= new Queue<Client>();
 		this.colaClientes = new PriorityQueue<Client>();
 		clients = new HashTable<String,Client>();
+		actions = new Stack<Client>();
 	}
 	
 	//TODO Check method
@@ -30,8 +32,8 @@ public class Bank{
 	
 	
 	//TODO Check method
-	public Client searchClient(String code) {
-		return clients.get(code);
+	public Client searchClient(String iD) {
+		return clients.get(iD);
 	}
  
 	
@@ -53,19 +55,19 @@ public class Bank{
 	
 	
 	//TODO
-	public boolean pay(String iD, int amount) {
+	public double pay(String iD, int amount) {
 		boolean a = false;
+		saveAction(clients.get(iD));
 		
-		return a;
+		clients.get(iD).setAccountBalance(amount);
+		return clients.get(iD).getAccountBalance();
 	}
 	
 	//TODO
-	public void saveAction() {
-		
+	public void saveAction(Client action) {
 	}
 	
 	//TODO
 	public void undo() {
-		
 	}
 }

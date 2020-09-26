@@ -8,6 +8,7 @@ public class Client implements Comparable<Client> {
 	private String name;
 	private String iD;
 	private String accountNumber;
+	private double accountBalance;
 	private LocalDate registerDate;
 	private int priority;
 	
@@ -21,6 +22,8 @@ public class Client implements Comparable<Client> {
 	}
 		
 		registerDate = LocalDate.now();	
+		
+		this.card = new DebitCard();
 	}
 
 	public DebitCard getCard() {
@@ -52,6 +55,15 @@ public class Client implements Comparable<Client> {
 		
 		return priority-o.getPriority();
 	}
+
+	public double getAccountBalance() {
+		return accountBalance;
+	}
+
+	public void setAccountBalance(double payment) {
+		this.accountBalance += payment;
+	}
+
 	
 	
 	
