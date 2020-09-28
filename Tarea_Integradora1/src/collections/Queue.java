@@ -1,43 +1,59 @@
 package collections;
 
+import exceptions.QueueIsAlreadyFullException;
+import exceptions.QueueIsEmptyException;
+
 public class Queue <T> implements IQueue<T> {
 
 	private Node<T> top;
 	private int size;
+	private int maxSize;
 	
-	public Queue() {
+	public Queue(int maxSize) {
 		this.top = null;
 		this.size=0;
+		this.maxSize = maxSize;
 	}
 
 	@Override
-	public void enqueue(T element) {
-		Node<T> toAdd = new Node<T>(element);
-		if(top==null) {
-			top=toAdd;
-			size++;
+	public void enqueue(T element) throws QueueIsAlreadyFullException {
+		if(size==maxSize) {
+			throw new QueueIsAlreadyFullException();
 		}else {
-			Node<T> cabeza=top;
-			while(cabeza.getNext()!=null) {
-				cabeza=cabeza.getNext();
+			Node<T> toAdd = new Node<T>(element);
+			if(top==null) {
+				top=toAdd;
+				size++;
+			}else {
+				Node<T> cabeza=top;
+				while(cabeza.getNext()!=null) {
+					cabeza=cabeza.getNext();
+				}
+				cabeza.setNext(toAdd);
 			}
-			cabeza.setNext(toAdd);
 		}
+		
 	
 		
 	}
 
 	@Override
-	public T dequeue() {
-		T element = null;
-		if(top!=null) {
-			element = top.getElement();
-			top=top.getNext();
-			size--;
-			return element;
+	public T dequeue() throws QueueIsEmptyException {
+		if(size==0) {
+			throw new QueueIsEmptyException();
 		}else {
-			return element;
-		}			
+			T element = null;
+
+			if(top!=null) {
+				element = top.getElement();
+				top=top.getNext();
+				size--;
+				return element;
+			}else {
+				return element;
+			}	
+		}
+				
 	}
 
 	@Override
@@ -48,7 +64,7 @@ public class Queue <T> implements IQueue<T> {
 		}else {
 			return element;
 		}
-	 
+
 	}
 
 
@@ -59,7 +75,7 @@ public class Queue <T> implements IQueue<T> {
 		}else {
 			return false;
 		}
-		
+
 	}
 
 }

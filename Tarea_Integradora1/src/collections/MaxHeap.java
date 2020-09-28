@@ -8,10 +8,9 @@ public class MaxHeap <T extends Comparable<T>> implements IMaxHeap<T> {
 	private int heapLength;
 	
 	
-	@SuppressWarnings("unchecked")
-	public MaxHeap() {
-		this.heapLength=10;
-		this.array = new Instance [heapLength];
+	public MaxHeap(Instance <T>[]array) {
+		this.array = array;
+		heapLength=array.length;
 		this.heapSize=0;
 	}
 
@@ -39,18 +38,19 @@ public class MaxHeap <T extends Comparable<T>> implements IMaxHeap<T> {
 
 	@Override
 	public void buildMaxHeap() {
-		heapSize=heapLength;
 		for(int i = heapLength/2; i > 1; i--) {
 			heapify(i);
 		}
 	}
 
 	@Override
-	public boolean insert(Instance<T> element) {
+	public boolean insert(T element) {
+		Instance<T> add = new Instance<T>(element);
 		if(heapSize<heapLength) {
 			for(int i = 0; i < heapLength; i++) {
 				if(array[i] == null) {
-					array[i] = element;
+					array[i] = add;
+					heapSize++;
 					buildMaxHeap();	
 					return true;
 				}
@@ -68,6 +68,7 @@ public class MaxHeap <T extends Comparable<T>> implements IMaxHeap<T> {
 
 	@Override
 	public void heapSort() {
+		int size = heapSize;
 		buildMaxHeap();
 		for(int i=heapLength;i<1;i--) {
 			Instance <T> aux = array[0];
@@ -75,7 +76,22 @@ public class MaxHeap <T extends Comparable<T>> implements IMaxHeap<T> {
 			array[i]=aux;
 			heapSize--;
 			heapify(0);
-		}	
+		}
+		this.heapSize=size;
+	}
+	
+	public int getSize() {
+		return heapSize;
+	}
+	
+	public T extractMaxAndDelete() {
+		Instance <T> aux = array[0];
+		array[0]=array[heapSize];
+		array[heapSize]=aux;
+		heapSize--;
+		array[heapSize]=null;
+		heapify(0);
+		return aux.getElement();
 	}
 	
 }

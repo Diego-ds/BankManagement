@@ -1,5 +1,8 @@
 package collections;
 
+import exceptions.QueueIsAlreadyFullException;
+import exceptions.QueueIsEmptyException;
+
 public class Stack <T> implements IStack<T>{
 	
 	Queue<T> cola1;
@@ -7,17 +10,17 @@ public class Stack <T> implements IStack<T>{
 	
 	
 	public Stack() {
-		this.cola1 = new Queue<T>();
-		this.aux = new Queue<T>();
+		this.cola1 = new Queue<T>(20);
+		this.aux = new Queue<T>(20);
 	}
 
 	@Override
-	public void apilar(T element) {
+	public void apilar(T element) throws QueueIsAlreadyFullException {
 			cola1.enqueue(element);
 	}
 
 	@Override
-	public T desapilar() {
+	public T desapilar() throws QueueIsAlreadyFullException, QueueIsEmptyException {
 		T element =null;
 		while(!cola1.isEmpty()) {
 			
@@ -27,7 +30,7 @@ public class Stack <T> implements IStack<T>{
 			}
 		}
 		cola1=aux;
-		aux= new Queue<T>();
+		aux= new Queue<T>(20);
 		return element;
 	}
 
