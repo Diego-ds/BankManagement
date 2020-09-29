@@ -17,7 +17,7 @@ public class Bank{
 		clients = new HashTable<String,Client>();
 	}
 	
-	public boolean addClient(String name, String iD, int priority) throws QueueIsAlreadyFullException {
+	public boolean addToQueue(String name, String iD, int priority) throws QueueIsAlreadyFullException {
 		boolean a = true;
 		
 		Client toAdd = searchClient(iD);
@@ -60,8 +60,6 @@ public class Bank{
 	
 	public boolean deleteClient(String iD, String reason) {
 		boolean a = false;
-		
-		
 		Element<String, Client> erased = new Element<String,Client>(HashTable.DELETED, null);
 		Client sd = clients.removeElement(iD, erased);
 	

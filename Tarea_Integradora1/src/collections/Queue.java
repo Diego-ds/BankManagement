@@ -17,8 +17,8 @@ public class Queue <T> implements IQueue<T> {
 
 	@Override
 	public void enqueue(T element) throws QueueIsAlreadyFullException {
-		if(size==maxSize) {
-			throw new QueueIsAlreadyFullException();
+		if(size>=maxSize) {
+			throw new QueueIsAlreadyFullException("queue");
 		}else {
 			Node<T> toAdd = new Node<T>(element);
 			if(top==null) {
@@ -30,6 +30,7 @@ public class Queue <T> implements IQueue<T> {
 					cabeza=cabeza.getNext();
 				}
 				cabeza.setNext(toAdd);
+				size++;
 			}
 		}
 		
@@ -40,10 +41,9 @@ public class Queue <T> implements IQueue<T> {
 	@Override
 	public T dequeue() throws QueueIsEmptyException {
 		if(size==0) {
-			throw new QueueIsEmptyException();
+			throw new QueueIsEmptyException("queue");
 		}else {
 			T element = null;
-
 			if(top!=null) {
 				element = top.getElement();
 				top=top.getNext();

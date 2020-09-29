@@ -35,7 +35,7 @@ public class DebitCard {
 		return moneyAmount;
 	}
 
-	public Double balance(double moneyAmount) {
+	public double balance(double moneyAmount) {
 		this.moneyAmount = this.moneyAmount + moneyAmount;
 		return moneyAmount;
 	}

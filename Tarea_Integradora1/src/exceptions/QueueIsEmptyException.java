@@ -1,10 +1,8 @@
 package exceptions;
 
+@SuppressWarnings("serial")
 public class QueueIsEmptyException extends Exception{
-
-	private static final long serialVersionUID = 1L;
-	
-	public QueueIsEmptyException() {
-		super("The queue is empty");
+	public QueueIsEmptyException(String structure) {
+		super("The "+structure+ " is empty");
 	}
 }

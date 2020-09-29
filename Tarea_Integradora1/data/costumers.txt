@@ -1,0 +1,16 @@
+Diego Garcia,132444,1
+David Montoya,453232,3
+Rafael Perez,325342,8
+Valeria Patiño,732524,5
+Miguel Muñoz,214221,7
+Manuel Quintana,642322,4
+Manuela Willys,434366,0
+Sergio Arboleda,453212,9
+Rodrigo Valencia,675532,0
+Camila Rendon,853221,7
+Carmela Taquez,555533,15
+Pepe Zamora,564321,2
+Raul Martinez,573219,10
+Hernan Victoria,953256,6
+Laura Restrepo,242564,7
+Camilo Mejia,399944,4
