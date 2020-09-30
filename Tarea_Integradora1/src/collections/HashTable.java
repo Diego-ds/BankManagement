@@ -1,5 +1,9 @@
 package collections;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class HashTable<K,V> implements IHashTable<K,V> {
 
 	public static final String DELETED = "superDeleted";
@@ -42,12 +46,9 @@ public class HashTable<K,V> implements IHashTable<K,V> {
 	@Override
 	public V get(K key) {
 		int index = getArrayIndex(key);
-		
 		for(int i=0;i<array.length;i++) {
 			int probing = ((index % 50)+ i) % 50;
 			Element<K,V> look = array[probing];
-			
-			
 			if(look == null) {
 				return null;
 			}else if(look.getKey().equals(key)) {
@@ -87,8 +88,7 @@ public class HashTable<K,V> implements IHashTable<K,V> {
 		for(int i=0;i<array.length && !val;i++) {
 			int index = ((arrayIndex % 50) + i) % 50;
 			Element <K,V> e = array[index];
-			Element <K,V> toAdd = new Element<K, V>(key,value);
-			
+			Element <K,V> toAdd = new Element<K, V>(key,value);	
 			if(e == null) {
 				array[index]=toAdd;
 				size++;
@@ -97,8 +97,23 @@ public class HashTable<K,V> implements IHashTable<K,V> {
 				array[index]=toAdd;
 				size++;
 				val=true;
-			 } 
+			 }
+			
 		}
 	}
+	
+	public List<V> convertList(){
+		List<V> a = new ArrayList<V>();
+		for(int i =0; i<array.length; i++) {
+			if(array[i] != null) {
+				if(!array[i].getKey().equals(DELETED)) {
+					a.add(array[i].getValue());
+				}
+			}
+		}
+		return a;
+	}
+	
+	
 
 }

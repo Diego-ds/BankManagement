@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 import collections.Stack;
 import exceptions.QueueIsAlreadyFullException;
 import exceptions.QueueIsEmptyException;
@@ -15,20 +17,10 @@ public class BankManagement {
 	}
 	
 	public boolean addToQueue(String name, String iD, int priority) throws QueueIsAlreadyFullException, QueueIsEmptyException {
-		if(actions.isEmpty() == false) {
-			actions.desapilar();
-		}
-		
-		saveAction(bank);
 		return bank.addToQueue(name, iD, priority);
 	}
 	
 	public void addToHash(String name, String iD, int priority) throws QueueIsAlreadyFullException, QueueIsEmptyException {
-		if(actions.isEmpty() == false) {
-			actions.desapilar();
-		}
-		
-		saveAction(bank);
 		bank.addToTable(name, iD, priority);
 	}
 	
@@ -38,12 +30,13 @@ public class BankManagement {
 	}
 	
 	public double modifyBalance(String iD, double value) throws UserNotFoundException, QueueIsAlreadyFullException, QueueIsEmptyException{
-		if(actions.isEmpty() == false) {
-			actions.desapilar();
-		}
-		
-		actions.apilar(bank);
+
 		return bank.modifyBalance(iD, value);
+	}
+	
+	public double pay(String iD, int amount) throws UserNotFoundException, QueueIsAlreadyFullException, QueueIsEmptyException {
+
+		return bank.pay(iD, amount);
 	}
 	
 	public boolean deleteClient(String iD, String reason) throws QueueIsAlreadyFullException, QueueIsEmptyException {
@@ -51,28 +44,25 @@ public class BankManagement {
 			actions.desapilar();
 		}
 		
-		actions.apilar(bank);
+		saveAction(bank);
 		return bank.deleteClient(iD, reason);
 	}
-	
-	public double pay(String iD, int amount) throws UserNotFoundException, QueueIsAlreadyFullException, QueueIsEmptyException {
-		if(actions.isEmpty() == false) {
-			actions.desapilar();
-		}
-		
-		actions.apilar(bank);
-		return bank.pay(iD, amount);
-	}
-	
-	public void saveAction(Bank bank) throws QueueIsAlreadyFullException {
 
-		actions.apilar(bank);
+	public void saveAction(Bank bank) throws QueueIsAlreadyFullException, QueueIsEmptyException {
+		actions.apilar(bank);	
 	}
 		
-	public boolean undo() throws QueueIsAlreadyFullException, QueueIsEmptyException {
-		this.bank = actions.desapilar();
-		return false;
+	public Bank undo() throws QueueIsAlreadyFullException, QueueIsEmptyException {
+		
+		return actions.desapilar();
+	}
+	
+	
+	public ArrayList<Client> hashToArray(){
+		return bank.hashToArray();
 	}
 
-	
+	public void setBank(Bank bank) {
+		this.bank=bank;
+	}
 }

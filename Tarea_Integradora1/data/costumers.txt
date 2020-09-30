@@ -1,8 +1,8 @@
 Diego Garcia,132444,1
 David Montoya,453232,3
 Rafael Perez,325342,8
-Valeria Patiño,732524,5
-Miguel Muñoz,214221,7
+Valeria Patino,732524,5
+Miguel Munoz,214221,7
 Manuel Quintana,642322,4
 Manuela Willys,434366,0
 Sergio Arboleda,453212,9

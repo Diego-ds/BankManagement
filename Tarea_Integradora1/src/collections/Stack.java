@@ -19,7 +19,7 @@ public class Stack <T> implements IStack<T>{
 	}
 
 	@Override
-	public void apilar(T element) throws QueueIsAlreadyFullException {
+	public void apilar(T element) throws QueueIsAlreadyFullException {	
 			if(size>=maxSize) {
 				throw new QueueIsAlreadyFullException("stack");
 			}else {

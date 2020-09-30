@@ -13,27 +13,29 @@ import model.BankManagement;
 public class MainBank extends Application {
 	
 	private BankManagement bank;
-	private BankGUI MainMenu;
+	private MainMenuGUI MainMenu;
 	
-	public MainBank() {
+	public MainBank() throws IOException, QueueIsAlreadyFullException, QueueIsEmptyException {
 		bank = new BankManagement();
-		MainMenu= new BankGUI(bank);
-	}
-	
-	public static void main(String[] args) throws IOException, QueueIsAlreadyFullException, QueueIsEmptyException {
-		MainBank main = new MainBank();
 		BufferedReader br = new BufferedReader(new FileReader(new File("data/costumers.txt")));
 		String line = br.readLine();
+		
 		while(line!=null) {
+			
 			String [] param = line.split(",");
 			String name= param[0];
 			String id = param[1];
 			int priority = Integer.parseInt(param[2]);
-			main.registerClient(name, id, priority);
+			bank.addToHash(name,id,priority);
 			line= br.readLine();
 			
 		}
+		
 		br.close();
+		MainMenu= new MainMenuGUI(bank);
+	}
+	
+	public static void main(String[] args) throws IOException, QueueIsAlreadyFullException, QueueIsEmptyException {
 		launch();	
 	}
 	
@@ -46,11 +48,7 @@ public class MainBank extends Application {
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Bank");
-		primaryStage.setResizable(true);
+		primaryStage.setResizable(false);
 		primaryStage.show();
-	}
-	
-	public void registerClient(String name,String id,int priority) throws QueueIsAlreadyFullException, QueueIsEmptyException {
-		bank.addToHash(name, id, priority);
 	}
 }

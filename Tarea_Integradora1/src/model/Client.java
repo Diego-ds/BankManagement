@@ -56,8 +56,8 @@ public class Client implements Comparable<Client> {
 		return priority-o.getPriority();
 	}
 
-	public double getAccountBalance() {
-		return accountBalance;
+	public String getAccountBalance() {
+		return String.valueOf(accountBalance);
 	}
 
 	public void setAccountBalance(double payment) {

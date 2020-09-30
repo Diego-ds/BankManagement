@@ -12,4 +12,6 @@ public class DeletedClient extends Client {
 	public String getReason() {
 		return reason;
 	}
+	
+	
 }

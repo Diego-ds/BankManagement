@@ -9,8 +9,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <Label alignment="CENTER" prefHeight="72.0" prefWidth="604.0" text="Enqueue Visitant" BorderPane.alignment="CENTER">
          <font>
@@ -21,9 +20,9 @@
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <TextField layoutX="281.0" layoutY="54.0" />
-            <TextField layoutX="281.0" layoutY="118.0" />
-            <Button layoutX="430.0" layoutY="259.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="123.0" text="Queue!">
+            <TextField fx:id="name" layoutX="281.0" layoutY="54.0" />
+            <TextField fx:id="iD" layoutX="281.0" layoutY="118.0" />
+            <Button layoutX="430.0" layoutY="259.0" mnemonicParsing="false" onAction="#enqueue" prefHeight="40.0" prefWidth="123.0" text="Queue!">
                <font>
                   <Font name="MS Outlook" size="18.0" />
                </font>
@@ -38,7 +37,7 @@
                   <Font name="MS Outlook" size="16.0" />
                </font>
             </Label>
-            <Button layoutX="48.0" layoutY="259.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="126.0" text="Go Back">
+            <Button layoutX="48.0" layoutY="259.0" mnemonicParsing="false" onAction="#goBack" prefHeight="25.0" prefWidth="126.0" text="Go Back">
                <font>
                   <Font name="MS Outlook" size="18.0" />
                </font>
