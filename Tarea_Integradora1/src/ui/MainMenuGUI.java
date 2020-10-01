@@ -2,6 +2,8 @@ package ui;
 
 import java.io.IOException;
 
+import exceptions.QueueIsAlreadyFullException;
+import exceptions.QueueIsEmptyException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,20 +14,23 @@ import model.BankManagement;
 
 public class MainMenuGUI {
 	
-	private BankManagement bank;
+	public BankManagement bank;
 	private EnQueueGUI enqueueScreen;
 	private SearchCostumerGUI searchCostumer;
 	private RegisteredCostumersGUI registeredCostumers;
+	private VisualizeQueueGUI visualizeQueue;
 	
 	 @FXML
 	 private BorderPane mainPane;
 	
-    public MainMenuGUI(BankManagement bank) {
+    public MainMenuGUI(BankManagement bank) throws QueueIsAlreadyFullException, QueueIsEmptyException {
 		this.bank = bank;
 		this.enqueueScreen = new EnQueueGUI(bank,this);
 		this.searchCostumer = new SearchCostumerGUI(bank, this);
 		this.registeredCostumers = new RegisteredCostumersGUI(bank,this);
+		this.visualizeQueue = new VisualizeQueueGUI(bank,this);
 	}
+    
     
    
     
@@ -66,7 +71,7 @@ public class MainMenuGUI {
     @FXML
     void visualizeQueue(ActionEvent event) throws IOException {
     	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxmlFiles/VisualizeQueue.fxml"));
-    	fxmlLoader.setController(registeredCostumers);
+    	fxmlLoader.setController(visualizeQueue);
     	
     	Parent costumersPane = fxmlLoader.load();
     	mainPane.getChildren().clear();
@@ -76,10 +81,11 @@ public class MainMenuGUI {
 
 	@FXML
 	void aboutUs(ActionEvent event) {
-		Alert alert = new Alert(Alert.AlertType.INFORMATION);
+		
+		Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
   	    alert.setHeaderText(null);
-  	    alert.setTitle("About Us");
-  	    alert.setContentText("We are MontoGarcia Enterprises");
+  	    alert.setTitle("About us");
+  	    alert.setContentText("The database is in data/costumers");
   	    alert.showAndWait();
 	}
     

@@ -2,9 +2,11 @@ package model;
 
 import java.time.LocalDate;
 
+import exceptions.InsufficientFundsException;
+
 public class Client implements Comparable<Client> {
 	
-	private DebitCard card;
+	private CreditCard card;
 	private String name;
 	private String iD;
 	private String accountNumber;
@@ -14,19 +16,21 @@ public class Client implements Comparable<Client> {
 	
 	
 	public Client(String name, String iD, int priority) {
+		this.accountBalance=0;
 		this.name = name;
 		this.iD = iD;
 		this.priority = priority;
+		accountNumber = "";
 		for(int i = 0; i<12; i++) {
 			accountNumber += String.valueOf((int)Math.floor(Math.random()*9));
 	}
 		
 		registerDate = LocalDate.now();	
-		
-		this.card = new DebitCard();
+		registerDate = registerDate.minusDays((long)Math.floor(Math.random()*30));
+		this.card = new CreditCard();
 	}
 
-	public DebitCard getCard() {
+	public CreditCard getCard() {
 		return card;
 	}
 
@@ -55,16 +59,31 @@ public class Client implements Comparable<Client> {
 		
 		return priority-o.getPriority();
 	}
+	
+	public int compareToAux(Client o) {
+		
+		return registerDate.compareTo(o.getRegisterDate());
+	}
 
 	public String getAccountBalance() {
 		return String.valueOf(accountBalance);
 	}
 
-	public void setAccountBalance(double payment) {
-		this.accountBalance += payment;
+	public void setAccountBalance(double payment) throws InsufficientFundsException {
+		if(payment<0) {
+			if(Math.abs(payment)>this.accountBalance) {
+				throw new InsufficientFundsException();
+			}else {
+				this.accountBalance = accountBalance- Math.abs(payment);
+			}
+		}else {
+			this.accountBalance += payment;
+		}		
 	}
 
-	
+	public void payCreditCard(double moneyAmount) {
+		card.balance(moneyAmount);
+	}
 	
 	
 }

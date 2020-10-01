@@ -42,7 +42,8 @@ public class MaxHeap <T extends Comparable<T>> implements IMaxHeap<T> {
 			Instance<T> p = array[i];
 			array[i] = array[largest];
 			array[largest] = p;
-			heapify(largest);}
+			heapify(largest);
+			}
 	}
 
 	@Override
@@ -51,7 +52,8 @@ public class MaxHeap <T extends Comparable<T>> implements IMaxHeap<T> {
 			heapify(i);
 		}
 	}
-
+	
+	
 	@Override
 	public void heapSort() {
 		int size = heapSize;
@@ -100,4 +102,9 @@ public class MaxHeap <T extends Comparable<T>> implements IMaxHeap<T> {
 	    heapify(0);
 	}
 	
+	public Instance<T> [] getArrayHeap(){
+		return array;
+	}
+	
+
 }

@@ -77,5 +77,9 @@ public class Queue <T> implements IQueue<T> {
 		}
 
 	}
+	
+	public int getSize() {
+		return size;
+	}
 
 }

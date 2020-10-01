@@ -2,13 +2,14 @@ package model;
 
 import java.time.LocalDate;
 
-public class DebitCard {
+public class CreditCard {
 	private String cardNumber;
 	private LocalDate paymentDue;
 	private double moneyAmount;
 	
-	public DebitCard(){
+	public CreditCard(){
 	
+		cardNumber = "";
 		for(int i = 0; i<10; i++) {
 			cardNumber += String.valueOf((int)Math.floor(Math.random()*9));
 		}
@@ -35,8 +36,8 @@ public class DebitCard {
 		return moneyAmount;
 	}
 
-	public double balance(double moneyAmount) {
-		this.moneyAmount = this.moneyAmount + moneyAmount;
+	public double balance(double moneyAmount)  {
+		this.moneyAmount = this.moneyAmount - moneyAmount;
 		return moneyAmount;
 	}
 	

@@ -112,6 +112,7 @@ class StackTest {
 	public void stackPeekTest2() throws QueueIsAlreadyFullException, QueueIsEmptyException {
 		setup6();
 		assertTrue(stack.top().getName().equals("Alison Robert"));
+		assertTrue(stack.top().getName().equals("Alison Robert"));
 	}
 	
 	@Test

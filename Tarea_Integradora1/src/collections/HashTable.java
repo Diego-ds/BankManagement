@@ -1,7 +1,6 @@
 package collections;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class HashTable<K,V> implements IHashTable<K,V> {

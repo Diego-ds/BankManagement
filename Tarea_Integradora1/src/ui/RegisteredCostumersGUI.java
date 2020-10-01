@@ -1,8 +1,6 @@
 package ui;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -20,7 +18,6 @@ public class RegisteredCostumersGUI {
 	
 	private BankManagement bank;
 	private MainMenuGUI mainMenu;
-	private ArrayList<Client> costumers;
 	
     public RegisteredCostumersGUI(BankManagement bank, MainMenuGUI mainMenu) {
 		this.bank = bank;
@@ -47,20 +44,38 @@ public class RegisteredCostumersGUI {
 
     @FXML
     void sortCostumers(ActionEvent event) {
-    	
+    	ArrayList<Client> clients = new ArrayList<Client>();
+    	String operation = comboBox.getValue();
+    	switch(operation) {
+    	case "Sort by ID":
+    		clients=bank.hashToArray();
+    		bank.sortById(clients, 0, clients.size()-1);
+    		initializeTableView(clients);
+    	break;
+    	case "Sort by name":
+    		clients=bank.hashToArray();
+    		bank.sortByName(clients, 0, clients.size()-1);
+    		initializeTableView(clients);
+    	break;
+    	case "Sort by Amount":
+    		clients=bank.hashToArray();
+    		bank.sortByAmount(clients);
+    		initializeTableView(clients);	
+    	break;
+    	}
     }
     
     public void initializeComboBox() {
     	comboBox.getItems().clear();
     	comboBox.setValue("Ordenar por ID");
-    	comboBox.getItems().addAll("Sort by ID","Sort by name","Sort by Amount","Sort by Date");
+    	comboBox.getItems().addAll("Sort by ID","Sort by name","Sort by Amount");
     }
     
     public void initializeTableView(ArrayList<Client> costumers) {
     	ObservableList<Client> obs = FXCollections.observableArrayList(costumers);
 	 	table.setItems(obs);
 	 	nameColumn.setCellValueFactory(new PropertyValueFactory<Client,String>("name"));
-	 	idColumn.setCellValueFactory(new PropertyValueFactory<Client,String>("id"));
+	 	idColumn.setCellValueFactory(new PropertyValueFactory<Client,String>("iD"));
 	 	dateColumn.setCellValueFactory(new PropertyValueFactory<Client,String>("registerDate"));
 	 	amountColumn.setCellValueFactory(new PropertyValueFactory<Client,String>("accountBalance"));
 	 	

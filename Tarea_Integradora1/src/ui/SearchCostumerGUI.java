@@ -21,14 +21,7 @@ public class SearchCostumerGUI {
 	private DepositGUI deposit;
 	private PayCardGUI payCard;
 	
-    public SearchCostumerGUI(BankManagement bank, MainMenuGUI mainMenu) {
-		this.bank = bank;
-		this.mainMenu = mainMenu;
-		this.deposit= new DepositGUI(bank,mainMenu,this);
-		this.payCard= new PayCardGUI(bank,mainMenu,this);
-	}
-
-	@FXML
+    @FXML
     private TextField idCamp;
 
     @FXML
@@ -52,8 +45,16 @@ public class SearchCostumerGUI {
     @FXML
     private Label moneyCamp;
 
-    @FXML
+    public SearchCostumerGUI(BankManagement bank, MainMenuGUI mainMenu) {
+		this.bank = bank;
+		this.mainMenu = mainMenu;
+		this.deposit= new DepositGUI(bank,mainMenu,this);
+		this.payCard= new PayCardGUI(bank,mainMenu,this);
+	}
+
+	@FXML
     public void cancelAccount(ActionEvent event) throws QueueIsAlreadyFullException, QueueIsEmptyException {
+		
     	String id = idCamp.getText();
      	if(id.equals("")) {
      		Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -108,7 +109,7 @@ public class SearchCostumerGUI {
     }
 
     @FXML
-    public void searchCostumer(ActionEvent event) throws IOException {
+    public void searchCostumer(ActionEvent event) throws IOException, QueueIsEmptyException, QueueIsAlreadyFullException {
      	String id = idCamp.getText();
      	if(id.equals("")) {
      		Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -140,7 +141,8 @@ public class SearchCostumerGUI {
     @FXML
     public void undo(ActionEvent event) throws QueueIsAlreadyFullException, QueueIsEmptyException {
     	try{
-    		this.bank.setBank(bank.undo());
+    		
+    		bank.setBank(bank.undo());
     		Alert alert = new Alert(Alert.AlertType.INFORMATION);
       	    alert.setHeaderText(null);
       	    alert.setTitle("Done!");
